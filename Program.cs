@@ -38,9 +38,9 @@ UsersList users = new UsersList();
 ItemsList items = new ItemsList();
 LoansList loans = new LoansList();
 
-users.RegisterUser("Mura", "Federico", "federico@mail.it", "asdfasdf", "123456789");
+/*users.RegisterUser("Mura", "Federico", "federico@mail.it", "asdfasdf", "123456789");
 users.RegisterUser("Alessio", "Vitiello", "alessio@mail.it", "asdfasdf", "123456789");
-users.RegisterUser("Margherita", "Laura", "laura@mail.it", "asdfasdf", "123456789");
+users.RegisterUser("Margherita", "Laura", "laura@mail.it", "asdfasdf", "123456789");*/
 
 items.AddItem("0", 120, "Interstellar", "Christopher Nolan", new DateTime(2014), "fantascienza", true, 3);
 items.AddItem("978-3-16-148410-0", 900, "Dune", "Frank Herbert", new DateTime(1973), "fantascienza", true, 3);
