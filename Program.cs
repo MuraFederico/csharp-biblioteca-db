@@ -42,9 +42,9 @@ LoansList loans = new LoansList();
 users.RegisterUser("Alessio", "Vitiello", "alessio@mail.it", "asdfasdf", "123456789");
 users.RegisterUser("Margherita", "Laura", "laura@mail.it", "asdfasdf", "123456789");*/
 
-items.AddItem("0", 120, "Interstellar", "Christopher Nolan", new DateTime(2014), "fantascienza", true, 3);
+/*items.AddItem("0", 120, "Interstellar", "Christopher Nolan", new DateTime(2014), "fantascienza", true, 3);
 items.AddItem("978-3-16-148410-0", 900, "Dune", "Frank Herbert", new DateTime(1973), "fantascienza", true, 3);
-items.AddItem("1", 155, "Dune", "Denis Villeneuve", new DateTime(2021), "fantascienza", true, 3);
+items.AddItem("1", 155, "Dune", "Denis Villeneuve", new DateTime(2021), "fantascienza", true, 3);*/
 
 
 User logged = null;
@@ -96,10 +96,9 @@ void PrintRegister()
     string email = Console.ReadLine();
     Console.Write("Password: ");
     string password = Console.ReadLine();
-    Console.Write("Phone Number: ");
-    string phone = Console.ReadLine();
 
-    users.RegisterUser(surname,name,email,password,phone);
+
+    users.RegisterUser(surname,name,email,password);
 }
 
 
@@ -126,6 +125,10 @@ void PrintLogin(User logged)
 
 void LoggedHome(User logged)
 {
+
+    Console.WriteLine($"****** Welcome {logged.name} ******\n");
+
+
     Console.Write("find item by name or code: ");
     string identifier = Console.ReadLine();   
       
