@@ -11,7 +11,7 @@ namespace csharp_biblioteca
 
         public int numberPages;
 
-        public Boock(string id, int numberPages, string title, string author, DateTime year, string genre, bool isAvailable, int inShelf) : base(id, title, author, year, genre, isAvailable, inShelf)
+        public Boock(int id, int numberPages, string title, string author, DateTime year, string genre, bool isAvailable, int inShelf) : base(id, title, author, year, genre, isAvailable, inShelf)
         {
             this.numberPages = numberPages;
             this.id = id;

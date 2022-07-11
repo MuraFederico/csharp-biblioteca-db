@@ -8,7 +8,7 @@ namespace csharp_biblioteca
 {
     internal class Item
     {
-        public string id;
+        public int id;
         public string title;
         public string author;
         public DateTime year;
@@ -16,7 +16,7 @@ namespace csharp_biblioteca
         public bool isAvailable;
         public int inShelf;
 
-        public Item(string id, string title, string author, DateTime year, string genre, bool isAvailable, int inShelf)
+        public Item(int id, string title, string author, DateTime year, string genre, bool isAvailable, int inShelf)
         {
             this.title = title;
             this.author = author;

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,11 +16,11 @@ namespace csharp_biblioteca
             this.loans = new List<Loan>();
         }
 
-        public void AddLoan(User loaner, Item item)
+/*        public void AddLoan(User loaner, Item item)
         {
             Loan newLoan = new Loan(loaner, item);
             loans.Add(newLoan);
-        }
+        }*/
 
         public Loan FindLoan(string loanerName)
         {
@@ -33,11 +34,43 @@ namespace csharp_biblioteca
             return null;
         }
 
-        public void MakeLoan(User loaner, Item itemLoaned)
+        public void MakeLoan(User loaner, int bookId, DateTime start, DateTime end)
         {
-            Loan newLoan = new Loan(loaner, itemLoaned);
-            loans.Add(newLoan);
-            itemLoaned.isAvailable = false;
+            using (SqlConnection connection = new SqlConnection("Data Source=localhost;Initial Catalog=biblioteca-db;Integrated Security=True"))
+            {
+                try
+                {
+                    connection.Open();
+
+                    using (SqlCommand command = connection.CreateCommand())
+                    using (SqlTransaction transaction = connection.BeginTransaction("UserCreation"))
+                    {
+                        command.Transaction = transaction;
+                        command.Connection = connection;
+
+                        try
+                        {
+                            command.CommandText = "INSERT INTO Rents (user_id, copy_id, start, end) VALUES (@user_id, @copy_id, @start, @end)";
+                            command.Parameters.Add(new SqlParameter("@user_id", loaner.id));
+                            command.Parameters.Add(new SqlParameter("@copy_id", bookId));
+                            command.Parameters.Add(new SqlParameter("@start", start));
+                            command.Parameters.Add(new SqlParameter("@end", end));
+
+                            command.ExecuteNonQuery();
+                            transaction.Commit();
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine(ex.ToString());
+                            transaction.Rollback();
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.ToString());
+                }
+            }
         }
 
         public void PrintLoans()

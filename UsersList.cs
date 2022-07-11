@@ -89,11 +89,12 @@ namespace csharp_biblioteca
                         {
                             while (reader.Read())
                             {
+                                int id = Convert.ToInt32(0);
                                 string name = reader.GetString(1);
                                 string surname = reader.GetString(2);
                                 email = reader.GetString(3);
                                 password = reader.GetString(4);
-                                user = new User(surname, name, email, password);
+                                user = new User(id, surname, name, email, password);
                                 user.isLogged = true;
                             }
                         }

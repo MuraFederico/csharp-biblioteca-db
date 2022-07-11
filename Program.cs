@@ -51,7 +51,9 @@ User logged = null;
 
 PrintHome(logged);
 
-loans.PrintLoans();
+
+
+/*loans.PrintLoans();*/
 
 /*users.PrintUsers();*/
 
@@ -128,57 +130,60 @@ void LoggedHome(User logged)
 
     Console.WriteLine($"****** Welcome {logged.name} ******\n");
 
+    MenuActions(logged);
 
-    Console.Write("find item by name or code: ");
-    string identifier = Console.ReadLine();   
-      
-    List<Item> results = new List<Item>();
-
-    items.FindItem(identifier).ForEach(item => results.Add(item));
-
-    Console.WriteLine("items found: \n");
-
-    int i = 1;
-    foreach (Item item in results)
-    {
-        Console.WriteLine($"{i}. {item.id}");
-        i++;
-    }
-
-    Console.Write("select an item: ");
-
-    int choice = int.Parse(Console.ReadLine());
-    
-    Item selectedItem = results[choice - 1];
-
-    ItemActions(selectedItem, logged);
 }
 
-void ItemActions(Item selectedItem, User logged)
+void MenuActions(User logged)
 {
-    Console.Clear();
     Console.WriteLine("###########");
     Console.WriteLine("# ACTIONS #");
     Console.WriteLine("###########\n");
 
-    Console.WriteLine("1. print details");
-    Console.WriteLine("2. loan");
+    Console.WriteLine("1. loan");
+    Console.WriteLine("2. ");
     Console.WriteLine("3. give back\n");
 
     string choice = Console.ReadLine();
 
     if(choice == "1")
     {
-        selectedItem.PrintItem();
-    }else if(choice == "2")
+        Console.Write("type book title or ISBN: ");
+        string srcString = Console.ReadLine();
+        List<Item> results = items.FindItem(srcString);
+        int i = 1;
+        foreach (Item book in results)
+        {
+            Console.WriteLine($"{i}. {book.title}");
+        }
+
+        Console.WriteLine();
+        Console.Write("Select a book ");
+        int index = int.Parse(Console.ReadLine()) - 1;
+        int id = results[index].id;
+
+        DateTime start = DateTime.Now;
+        //Console.Write("End rent date (gg/mm/yyyy)");
+        DateTime end = start.AddMonths(3);
+        Console.WriteLine(start.ToString());
+        Console.WriteLine(end.ToString());
+
+        int z = 0;
+        loans.MakeLoan(logged, id, start, end);
+
+    }
+    else if(choice == "2")
     {
-        loans.MakeLoan(logged, selectedItem);
+        
     }else if(choice == "3")
     {
+        Console.WriteLine("not implemented");
+        MenuActions(logged);
 
-    }else
+    }
+    else
     {
         Console.WriteLine("invalid input");
-        ItemActions(selectedItem, logged);
+        MenuActions(logged);
     }
 }
