@@ -165,10 +165,7 @@ void MenuActions(User logged)
         DateTime start = DateTime.Now;
         //Console.Write("End rent date (gg/mm/yyyy)");
         DateTime end = start.AddMonths(3);
-        Console.WriteLine(start.ToString());
-        Console.WriteLine(end.ToString());
 
-        int z = 0;
         loans.MakeLoan(logged, id, start, end);
 
     }

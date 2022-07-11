@@ -38,7 +38,7 @@ namespace csharp_biblioteca
                             command.Parameters.Add(new SqlParameter("@email", email));
                             command.Parameters.Add(new SqlParameter("@password", password));
 
-                            command.ExecuteNonQuery();
+/*                            command.ExecuteNonQuery();*/
                             transaction.Commit();
                         } catch (Exception ex)
                         {
@@ -89,7 +89,7 @@ namespace csharp_biblioteca
                         {
                             while (reader.Read())
                             {
-                                int id = Convert.ToInt32(0);
+                                int id = reader.GetInt32(0);
                                 string name = reader.GetString(1);
                                 string surname = reader.GetString(2);
                                 email = reader.GetString(3);

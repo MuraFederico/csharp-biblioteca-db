@@ -17,6 +17,7 @@ namespace csharp_biblioteca
 
         public User(int id, string surname, string name, string email, string password)
         {
+            this.id = id;
             this.surname = surname;
             this.name = name;
             this.email = email;

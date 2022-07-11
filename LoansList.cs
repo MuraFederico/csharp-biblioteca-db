@@ -50,7 +50,7 @@ namespace csharp_biblioteca
 
                         try
                         {
-                            command.CommandText = "INSERT INTO Rents (user_id, copy_id, start, end) VALUES (@user_id, @copy_id, @start, @end)";
+                            command.CommandText = "INSERT INTO Rents (user_id, Copy_id, Start, [End]) VALUES (@user_id, @copy_id, @start, @end)";
                             command.Parameters.Add(new SqlParameter("@user_id", loaner.id));
                             command.Parameters.Add(new SqlParameter("@copy_id", bookId));
                             command.Parameters.Add(new SqlParameter("@start", start));
@@ -61,14 +61,14 @@ namespace csharp_biblioteca
                         }
                         catch (Exception ex)
                         {
-                            Console.WriteLine(ex.ToString());
+                            Console.WriteLine(ex.Message);
                             transaction.Rollback();
                         }
                     }
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine(ex.ToString());
+                    Console.WriteLine(ex.Message);
                 }
             }
         }
